@@ -1,3 +1,4 @@
+from optparse import Option
 from deep_translator import GoogleTranslator
 from cryptography.fernet import Fernet
 from functools import reduce
@@ -5,123 +6,136 @@ import pyfiglet
 import os
 
 class Update:
-    clave = Fernet.generate_key()
+    key = Fernet.generate_key()
 
     def Encrypt():
-        # Se abre el archivo clave.key para leer la clave
-        with open('clave.key', 'rb') as filekey: 
+        # Opened the file Thekey.key to read the key
+        with open("Thekey.key", "rb") as filekey: 
             key = filekey.read() 
         fernet = Fernet(key) 
             
-        # Se lee el archivo a encriptar
-        with open('Password.txt', 'rb') as file: 
+        # Read the file to be encrypted
+        with open("Password.txt", "rb") as file: 
             original = file.read()
             
-        # Se encripta el archivo
+        # Encrypted the file
         encrypted = fernet.encrypt(original) 
             
-        # Se escribe el archivo encriptado
-        with open('Password.txt', 'wb') as encrypted_file: 
+        # Write the encrypted file
+        with open("Password.txt", "wb") as encrypted_file: 
             encrypted_file.write(encrypted)
 
     def Decrypt():
-        # Se abre el archivo clave.key para leer la clave
-        with open('clave.key', 'rb') as filekey: 
+        # Opened the file Thekey.key to read the key
+        with open("Thekey.key", "rb") as filekey: 
             key = filekey.read()
 
-        # Se lee el archivo a desencriptar
-        with open('Password.txt', 'rb') as enc_file: 
+        # Reading the encrypted file
+        with open("Password.txt", "rb") as enc_file: 
             Decrypt = enc_file.read()
 
+        # Decrypt the file and retorned the text
         fernet = Fernet(key)
-
-        # Se desencripta el archivo y retorna el texto
         decrypted = fernet.decrypt(Decrypt)
         return decrypted.decode()
         
-    def Actualizar():
+    def Main():
+        # Declaring the variables
         passw = Update.Decrypt()
-        Respuesta = "y"
+        Yes = "y"
 
-        os.system('echo %s |sudo -S pacman -Syyyyu' % passw)
+        # This is the error 
+        os.system("echo %s |sudo -S pacman -Syyyyu" % passw)
 
-        print("\n¿Desea borrar la cache de pacman?")
-        print("\n1. Dejar las tres ultimas versiones")
-        print("2. Dejar solamente la actual:\n")
+        # These are the selections to choose from
+        print("\nDo you want eraser cache?\n")
+        print("1. Leave the three previous versions")
+        print("2. Only leave a one version\n")
 
-        respuesta = input("Elegir una opcion: ")
+        # This is the selection
+        Option = input("Type an option: ")
 
-        if respuesta == "1":
-            os.system('echo %s| sudo -S paccache -r\n' % Respuesta)
-            os.system('echo %s' % Respuesta)
+        if Option == "1":
+            os.system("echo %s| sudo -S paccache -r\n" % Yes)
+            os.system("echo %s" % Yes)
 
-        elif respuesta == "2":
-            os.system('echo %s|sudo -S pacman -Scc\n' % Respuesta)
-            os.system('echo %s' % Respuesta)
+        elif Option == "2":
+            os.system("echo %s|sudo -S pacman -Scc\n" % Yes)
+            os.system("echo %s" % Yes)
 
         else:
-            print("\nRespuesta incorrecta")
+            print("\nWrong choice")
 
     def Make_dir():
-        os.mkdir("Recursos")
-        os.chdir("Recursos")
+        os.mkdir("Resources")
+        os.chdir("Resources")
 
-        # Genera una clave Fernet para encriptar la clave root
-        global clave
-        clave = Fernet.generate_key()
-        with open("clave.key","wb") as archivo_clave:
-            archivo_clave.write(clave)
+        # Generate a key Fernet for encrypting password root
+        global key
+        key = Fernet.generate_key()
+        with open("Thekey.key","wb") as File_key:
+            File_key.write(key)
 
-        password = input("Introducir la contraseña root: ")
+        password = input("Type the root pasword: ")
 
-        with open("Password.txt","w") as archivo_clave:
-            archivo_clave.write(password)
+        with open("Password.txt","w") as File_key:
+            File_key.write(password)
 
 class Translate:
-    def main():
-        Opcion = input("Introduce la opcion: ")
-        Texto = input("Introducir palabras a traducir: ")
+    def Main():
+        Opcion = input("Type an option: ")
+        Texto = input("Type the word to traslate: ")
         Español = "es"
         Ingles = "en"
 
         if(Opcion == "1"):
-            traductor = GoogleTranslator(source= Español, target= Ingles)
+            traductor = GoogleTranslator(
+                                        source= Español, target= Ingles)
             resultado = traductor.translate(Texto)
-            print("La traduccion al ingles es: " + resultado)
+            print("The translation from English to Spanish is: "
+                    + resultado)
 
-        else:
-            traductor = GoogleTranslator(source= Ingles, target= Español)
+        elif(Opcion == "2"):
+            traductor = GoogleTranslator(
+                                        source= Ingles, target= Español)
             resultado = traductor.translate(Texto)
-            print("La traduccion al ingles es: " + resultado)
+            print("The translation from Spanish to English is: "
+                    + resultado)
+                    
+        else: 
+            print("\nWrong choice")
 
 class Calculator:
     def main():
-        Numeros = []
-        print("\nEn cada entrada introduce un numero, cuando termines solo presiona enter\n")
+        Numbers = []
+        print("\nEn cada entrada introduce un numero, "
+                + "cuando termines solo presiona enter\n")
 
+        # This loops to add the numbers
         while True:
-            Numeros.append(input("Introduce los numeros: "))
-            if Numeros[-1] == "":
+            Numbers.append(input("Type the numbers: "))
+            if Numbers[-1] == "":
                 break
-        Numeros.pop()
+        Numbers.pop()
 
-        Lista_final = [int(item) for item in Numeros]
-        return Lista_final
+        # This is for a insert the numbers in a list
+        Final_list = [int(item) for item in Numbers]
+        return Final_list
 
-    def Suma(x,y):
+    def Sum(x,y):
         return x+y
 
-    def Resta(x,y): 
+    def Subtract(x,y): 
         return x-y
 
-    def Multi(x,y): 
+    def Multiplication(x,y): 
         return x*y
 
-    def Div(x,y):
+    def Division(x,y):
         return x/y
 
 while True:
-    os.system('clear')
+    os.system("clear")
     print(pyfiglet.figlet_format("Terminal tools"))
 
     print("1. Update")
@@ -129,74 +143,79 @@ while True:
     print("3. Calculator")
     print("4. Exit\n")
 
-    switch = input("Seleccione una opcion: ")
+    switch = input("Type an option: ")
 
     if(switch == "1"):
-        os.system('clear')
+        os.system("clear")
 
         try:
-            os.chdir("Recursos")
+            os.chdir("Recurses")
 
         except:
                 Update.Make_dir()
         
-        Update.Actualizar()
+        Update.Main()
         os.chdir("..")
-        os.system('clear')
+        os.system("clear")
 
     elif(switch == "2"):
-        os.system('clear')
-        print("Bienvenido al traductor\n")
-        print("Que idioma quiere traducir:")
-        print('1) Español - Ingles')
-        print('2) Ingles - Español\n')
+        os.system("clear")
+        print("Welcome to translate\n")
+        print("Which language do you want to translate?")
+        print("1) Spanish - English")
+        print("2) English - Spanish\n")
 
         Translate.main()
 
-        Siguiente = input("\nDesea realizar otra traduccion? (y/n): ")
+        Siguiente = input("\nDo you want to do other translations? "
+                            + "(y/n): ")
         if Siguiente == "n":
-            os.system('clear')
+            os.system("clear")
         
     elif(switch == "3"):
         Numeros = []
 
-        os.system('clear')
-        print("Bienvenido a la calculadora\n")
-        print("Que operacion desea realizar: \n")
+        os.system("clear")
+        print("Welcome to calculator\n")
+        print("What operation do want to do? \n")
 
-        print("1. Suma")
-        print("2. Resta")
-        print("3. Multiplicacion")
+        print("1. Sum")
+        print("2. Substract")
+        print("3. Multiplication")
         print("4. Division\n")
 
-        Respuesta = input("Elija una opcion: ")
+        Respuesta = input("Type an option: ")
 
         if Respuesta == "1":
-            print("El resultado es:" + str(reduce(Calculator.Suma, Calculator.main())))
-            Siguiente = input("\nDesea realizar otra operacion? (y/n): ")
+            print("The resul is: " + str(reduce(Calculator.Suma, Calculator.main())))
+            Siguiente = input("\nDo you want to do other operations?"
+                                + "(y/n): ")
             if Siguiente == "n":
-                os.system('clear')
+                os.system("clear")
 
         elif Respuesta == "2":
-            print("El resultado es:" + str(reduce(Calculator.Resta, Calculator.main())))
-            Siguiente = input("\nDesea realizar otra operacion? (y/n): ")
+            print("The resul is: " + str(reduce(Calculator.Resta, Calculator.main())))
+            Siguiente = input("\nDo you want to do other operations?"
+                                + "(y/n): ")
             if Siguiente == "n":
-                os.system('clear')
+                os.system("clear")
 
         elif Respuesta == "3":
-            print("El resultado es:" + str(reduce(Calculator.Multi, Calculator.main())))
-            Siguiente = input("\nDesea realizar otra operacion? (y/n): ")
+            print("The resul is: " + str(reduce(Calculator.Multi, Calculator.main())))
+            Siguiente = input("\nDo you want to do other operations?"
+                                + "(y/n): ")
             if Siguiente == "n":
-                os.system('clear')
+                os.system("clear")
 
         elif Respuesta == "4":
-            print("El resultado es:" + str(reduce(Calculator.Div, Calculator.main())))
-            Siguiente = input("\nDesea realizar otra operacion? (y/n): ")
+            print("The resul is: " + str(reduce(Calculator.Div, Calculator.main())))
+            Siguiente = input("\nDo you want to do other operations?"
+                                + "(y/n): ")
             if Siguiente == "n":
-                os.system('clear')
+                os.system("clear")
 
         elif Respuesta == "5":
-            os.system('clear')
+            os.system("clear")
             break
 
     elif(switch == "4"):
