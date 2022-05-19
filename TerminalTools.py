@@ -5,6 +5,7 @@ import os
 
 class Update:
     def Main():
+
         # Declaring the variables
         Yes = "y"
 
@@ -14,45 +15,51 @@ class Update:
         # These are the selections to choose from
         print("\nDo you want eraser cache?\n")
         print("1. Leave the three previous versions")
-        print("2. Only leave a one version\n")
+        print("2. Only leave a one version")
 
-        # This is the selection
-        Option = input("Type an option: ")
+        while True:
+            # This is the selection
+            Option = input("\nType an option: ")
 
-        if Option == "1":
-            os.system("echo %s| sudo -S paccache -r\n" % Yes)
-            os.system("echo %s" % Yes)
+            if Option == "1":
+                os.system("echo %s| sudo -S paccache -r\n" % Yes)
+                os.system("echo %s" % Yes)
+                break
 
-        elif Option == "2":
-            os.system("echo %s|sudo -S pacman -Scc\n" % Yes)
-            os.system("echo %s" % Yes)
+            elif Option == "2":
+                os.system("echo %s|sudo -S pacman -Scc\n" % Yes)
+                os.system("echo %s" % Yes)
+                break
 
-        else:
-            print("\nWrong choice")
+            else:
+                print("\nWrong choice")
 
 class Translate:
     def Main():
-        Opcion = input("Type an option: ")
-        Texto = input("Type the word to traslate: ")
-        Español = "es"
-        Ingles = "en"
+        while True:
+            Opcion = input("Type an option: ")
+            Texto = input("Type the word to traslate: ")
+            Español = "es"
+            Ingles = "en"
 
-        if(Opcion == "1"):
-            traductor = GoogleTranslator(
-                                        source= Español, target= Ingles)
-            resultado = traductor.translate(Texto)
-            print("The translation from English to Spanish is: "
-                    + resultado)
+            if(Opcion == "1"):
+                traductor = GoogleTranslator(
+                                            source= Español, target= Ingles)
+                resultado = traductor.translate(Texto)
+                print("The translation from English to Spanish is: "
+                        + resultado)
+                break
 
-        elif(Opcion == "2"):
-            traductor = GoogleTranslator(
-                                        source= Ingles, target= Español)
-            resultado = traductor.translate(Texto)
-            print("The translation from Spanish to English is: "
-                    + resultado)
-                    
-        else: 
-            print("\nWrong choice")
+            elif(Opcion == "2"):
+                traductor = GoogleTranslator(
+                                            source= Ingles, target= Español)
+                resultado = traductor.translate(Texto)
+                print("The translation from Spanish to English is: "
+                        + resultado)
+                break
+                        
+            else: 
+                print("\nWrong choice")
 
 class Calculator:
     def main():
@@ -97,7 +104,6 @@ while True:
     if(switch == "1"):
         os.system("clear")
         Update.Main()
-        os.chdir("..")
         os.system("clear")
 
     elif(switch == "2"):
@@ -117,48 +123,48 @@ while True:
     elif(switch == "3"):
         Numeros = []
 
-        os.system("clear")
-        print("Welcome to calculator\n")
-        print("What operation do want to do? \n")
-
-        print("1. Sum")
-        print("2. Substract")
-        print("3. Multiplication")
-        print("4. Division\n")
-
-        Respuesta = input("Type an option: ")
-
-        if Respuesta == "1":
-            print("The resul is: " + str(reduce(Calculator.Sum, Calculator.main())))
-            Siguiente = input("\nDo you want to do other operations?"
-                                + "(y/n): ")
-            if Siguiente == "n":
-                os.system("clear")
-
-        elif Respuesta == "2":
-            print("The resul is: " + str(reduce(Calculator.Subtract, Calculator.main())))
-            Siguiente = input("\nDo you want to do other operations?"
-                                + "(y/n): ")
-            if Siguiente == "n":
-                os.system("clear")
-
-        elif Respuesta == "3":
-            print("The resul is: " + str(reduce(Calculator.Multiplication, Calculator.main())))
-            Siguiente = input("\nDo you want to do other operations?"
-                                + "(y/n): ")
-            if Siguiente == "n":
-                os.system("clear")
-
-        elif Respuesta == "4":
-            print("The resul is: " + str(reduce(Calculator.Division, Calculator.main())))
-            Siguiente = input("\nDo you want to do other operations?"
-                                + "(y/n): ")
-            if Siguiente == "n":
-                os.system("clear")
-
-        elif Respuesta == "5":
+        while True:
             os.system("clear")
-            break
+            print("Welcome to calculator\n")
+            print("What operation do want to do? \n")
+
+            print("1. Sum")
+            print("2. Substract")
+            print("3. Multiplication")
+            print("4. Division\n")
+
+            Respuesta = input("Type an option: ")
+
+            if Respuesta == "1":
+                print("The resul is: " + str(reduce(Calculator.Sum, Calculator.main())))
+                Siguiente = input("\nDo you want to do other operations?"
+                                    + "(y/n): ")
+                if Siguiente == "n":
+                    os.system("clear")
+
+            elif Respuesta == "2":
+                print("The resul is: " + str(reduce(Calculator.Subtract, Calculator.main())))
+                Siguiente = input("\nDo you want to do other operations?"
+                                    + "(y/n): ")
+                if Siguiente == "n":
+                    os.system("clear")
+
+            elif Respuesta == "3":
+                print("The resul is: " + str(reduce(Calculator.Multiplication, Calculator.main())))
+                Siguiente = input("\nDo you want to do other operations?"
+                                    + "(y/n): ")
+                if Siguiente == "n":
+                    os.system("clear")
+
+            elif Respuesta == "4":
+                print("The resul is: " + str(reduce(Calculator.Division, Calculator.main())))
+                Siguiente = input("\nDo you want to do other operations?"
+                                    + "(y/n): ")
+                if Siguiente == "n":
+                    os.system("clear")
+
+            else:
+                os.system("Wrone choice")
 
     elif(switch == "4"):
         print("Exiting...")
