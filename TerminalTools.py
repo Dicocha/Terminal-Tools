@@ -1,4 +1,3 @@
-from optparse import Option
 from deep_translator import GoogleTranslator
 from cryptography.fernet import Fernet
 from functools import reduce
@@ -81,6 +80,8 @@ class Update:
         with open("Password.txt","w") as File_key:
             File_key.write(password)
 
+        Update.Encrypt()
+
 class Translate:
     def Main():
         Opcion = input("Type an option: ")
@@ -149,10 +150,10 @@ while True:
         os.system("clear")
 
         try:
-            os.chdir("Recurses")
+            os.chdir("Resources")
 
         except:
-                Update.Make_dir()
+            Update.Make_dir()
         
         Update.Main()
         os.chdir("..")
@@ -165,7 +166,7 @@ while True:
         print("1) Spanish - English")
         print("2) English - Spanish\n")
 
-        Translate.main()
+        Translate.Main()
 
         Siguiente = input("\nDo you want to do other translations? "
                             + "(y/n): ")
@@ -187,28 +188,28 @@ while True:
         Respuesta = input("Type an option: ")
 
         if Respuesta == "1":
-            print("The resul is: " + str(reduce(Calculator.Suma, Calculator.main())))
+            print("The resul is: " + str(reduce(Calculator.Sum, Calculator.main())))
             Siguiente = input("\nDo you want to do other operations?"
                                 + "(y/n): ")
             if Siguiente == "n":
                 os.system("clear")
 
         elif Respuesta == "2":
-            print("The resul is: " + str(reduce(Calculator.Resta, Calculator.main())))
+            print("The resul is: " + str(reduce(Calculator.Subtract, Calculator.main())))
             Siguiente = input("\nDo you want to do other operations?"
                                 + "(y/n): ")
             if Siguiente == "n":
                 os.system("clear")
 
         elif Respuesta == "3":
-            print("The resul is: " + str(reduce(Calculator.Multi, Calculator.main())))
+            print("The resul is: " + str(reduce(Calculator.Multiplication, Calculator.main())))
             Siguiente = input("\nDo you want to do other operations?"
                                 + "(y/n): ")
             if Siguiente == "n":
                 os.system("clear")
 
         elif Respuesta == "4":
-            print("The resul is: " + str(reduce(Calculator.Div, Calculator.main())))
+            print("The resul is: " + str(reduce(Calculator.Division, Calculator.main())))
             Siguiente = input("\nDo you want to do other operations?"
                                 + "(y/n): ")
             if Siguiente == "n":
