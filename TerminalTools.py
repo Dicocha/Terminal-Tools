@@ -1,6 +1,8 @@
 from deep_translator import GoogleTranslator
 from functools import reduce
+import pyperclip
 import pyfiglet
+import random
 import os
 
 class Update:
@@ -90,6 +92,23 @@ class Calculator:
     def Division(x,y):
         return x/y
 
+class Generator_Password:
+    def main():
+        Lowercase = "abcdefghijklmnopqrstuvwxyz"
+        Uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        Numbers = "0123456789"
+        Symbols = "!@#$%^&*()_+-=[]{}|;""':,./<>?`~"
+
+        count = input("How to long do you want your password? ")
+
+        Random = random.choices(Lowercase + Uppercase
+                                + Numbers + Symbols, k=int(count))
+
+        password = ("".join(Random))
+        pyperclip.copy(password)
+        pyperclip.paste()
+        print("\nYour password is in you clipboard\n")
+
 while True:
     os.system("clear")
     print(pyfiglet.figlet_format("Terminal tools"))
@@ -97,13 +116,16 @@ while True:
     print("1. Update")
     print("2. Translate")
     print("3. Calculator")
-    print("4. Exit\n")
+    print("4. Password generator")
+    print("5. Exit\n")
 
     switch = input("Type an option: ")
 
     if(switch == "1"):
         os.system("clear")
         Update.Main()
+        print("Your system has been updated")
+        input("\n*** Press enter to continue ***")
         os.system("clear")
 
     elif(switch == "2"):
@@ -167,6 +189,12 @@ while True:
                 os.system("Wrone choice")
 
     elif(switch == "4"):
+        os.system("clear")
+        print("\nThis is the password generator\n")
+        Generator_Password.main()
+        input("\n*** Press enter to continue ***")
+
+    elif(switch == "5"):
         print("Exiting...")
         os.system("clear")
         break
